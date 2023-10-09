@@ -167,8 +167,12 @@ class ManageMediaWin(QMainWindow):
                 file.write(self.item_dict[self.last_sender][0].data)
 
     def open_win_media(self):
-        self.viewer = MediaViewer(self.item_dict[self.last_sender])
-        self.viewer.show()
+        match types[self.item_dict[self.last_sender][1].textBrowser.toPlainText().split('.')[-1]]:
+            case 'photo':
+                self.viewer = MediaViewer(self.item_dict[self.last_sender])
+                self.viewer.show()
+            case _:
+                pass
 
     def make_wid(self):
         self.all_wids = list(map(lambda x: self.set_data_wid(x), self.data))
@@ -264,7 +268,7 @@ class ManageMediaWin(QMainWindow):
             case 'photo':
                 self.pushButton.setIcon(QIcon(f'img/icon_data/{path}'))
             case _:
-                pass
+                self.pushButton.setIcon(QIcon(''))
 
 
 class MediaViewer(QMainWindow):
