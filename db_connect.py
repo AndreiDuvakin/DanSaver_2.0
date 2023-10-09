@@ -29,7 +29,7 @@ class Media(base):
     __tablename__ = 'media'
 
     id = sq.Column(sq.Integer, primary_key=True, autoincrement=True)
-    name = sq.Column(sq.String)
+    name = sq.Column(sq.String, unique=True)
     data = sq.Column(sq.BLOB, unique=True, nullable=False)
     date = sq.Column(sq.DateTime, default=datetime.datetime.now())
     exe_id = sq.Column(sq.Integer, sq.ForeignKey('extensions.id'))
